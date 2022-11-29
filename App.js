@@ -1,53 +1,146 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
- 
-export default function App() {
+import {StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity} from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'PinIt!'}}/>
+        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login'}}/>
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'PinIt!'}}/>
+        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'PinIt!'}}/>
+        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'PinIt!'}}/>
+        <Stack.Screen name="Profile" components={ProfileScreen} options={ {title: 'PinIt!'}}/>
+        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'PinIt!'}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+export default App;
+
+function HomeScreen({navigation}) {
+    return (
+       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home</Text>
+        <Button title="Locations" onPress={() => navigation.navigate('Locations')}/>
+        <Button title="Leaderboard" onPress={() => navigation.navigate('LeaderBoard')}/>
+        <Button title="Upload" onPress={() => navigation.navigate('Upload')}/>
+        <Button title="Profile" onPress={() => navigation.navigate('Profile')}/>
+    </View>
+    );
+}
+
+function RegisterScreen({navigation}) {
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- 
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require("./assets/pin.png")} />
- 
       <Text style={styles.title}> Pin It !</Text>
       <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          placeholderTextColor="#003f5c"
-          onChangeText={(email) => setEmail(email)}
-        />
+     <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Name"
+        placeholderTextColor="#003f5c"
+        onChangeText={(namel) => setEmail(name)}
+      />
       </View>
- 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Email"
+        placeholderTextColor="#003f5c"
+        onChangeText={(email) => setEmail(email)}
+      />
       </View>
- 
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
- 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Password"
+        placeholderTextColor="#003f5c"
+        secureTextEntry={true}
+        onChangeText={(password) => setPassword(password)}
+      />
+    </View>
+    <TouchableOpacity>
+      <Button style={styles.forgot_button} title="Already Have An Account? Login Now!" onPress={() => navigation.navigate('Login')}/>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.loginBtn}>
+      <Button title="Register" onPress={() => navigation.navigate('Home')}/>
+    </TouchableOpacity>
     </View>
   );
+}
+
+function LoginScreen({navigation}) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  return (
+    <View style={styles.container}>
+      <Image style={styles.image} source={require("./assets/pin.png")} />
+      <Text style={styles.title}> Pin It !</Text>
+      <StatusBar style="auto" />
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Email"
+        placeholderTextColor="#003f5c"
+        onChangeText={(email) => setEmail(email)}
+      />
+      </View>
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Password"
+        placeholderTextColor="#003f5c"
+        secureTextEntry={true}
+        onChangeText={(password) => setPassword(password)}
+      />
+    </View>
+    <TouchableOpacity style={styles.loginBtn}>
+      <Button title="Login" onPress={() => navigation.navigate('Home')}/>
+    </TouchableOpacity>
+    </View>
+  );
+}
+
+function LocationScreen() {
+    return (
+       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Register</Text>
+    </View>
+    );
+}
+
+function UploadScreen() {
+    return (
+       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Register</Text>
+    </View>
+    );
+}
+
+function ProfileScreen() {
+    return (
+       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Register</Text>
+    </View>
+    );
+}
+
+function LeaderboardScreen() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Register</Text>
+    </View>
+    );
 }
  
 const styles = StyleSheet.create({
