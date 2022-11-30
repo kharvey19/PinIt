@@ -1,8 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Device from 'expo-device';
+import * as Location from 'expo-location';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +27,33 @@ export default App;
 
 
 function HomeScreen({navigation}) {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS === 'android' && !Device.isDevice) {
+        setErrorMsg(
+          'Oops, this will not work on Snack in an Android Emulator. Try it on your device!'
+        );
+        return;
+      }
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e0aaff'}}>
         <Text style={styles.heading}> Home </Text>
@@ -110,7 +139,7 @@ function LoginScreen({navigation}) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.pages}>
       <Image style={styles.image} source={require("./assets/pin.png")} />
-      <Text style={styles.title}> Pin It !</Text>
+      <Text style={styles.title}> Pin It!</Text>
       <StatusBar style="auto" />
     <View style={styles.inputView}>
       <TextInput
@@ -144,7 +173,7 @@ function LocationScreen() {
     );
 }
 
-function UploadScreen() {
+function UploadScreen({navigation}) {
     const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -172,7 +201,7 @@ function UploadScreen() {
       />
     </View>
     <TouchableOpacity style={styles.loginBtn}>
-      <Button color='white' title="Login" onPress={() => navigation.navigate('Home')}/>
+      <Button color='white' title="Submit" onPress={() => navigation.navigate('Leaderboard')}/>
     </TouchableOpacity>
     </KeyboardAvoidingView>
   );
