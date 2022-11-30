@@ -56,18 +56,19 @@ function HomeScreen({navigation}) {
   }
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e0aaff'}}>
+        <Image style={styles.house_image} source={require("./assets/house.png")} />
         <Text style={styles.heading}> Home </Text>
         <TouchableOpacity style={styles.menuBtns}>
-          <Button fontfamily='sans-serif' fontweight='bold' color='#bd68ee' title="Locations" onPress={() => navigation.navigate('Locations')}/>
+          <Button fontfamily='sans-serif' fontweight='bold' color='#0096c7' title="Locations" onPress={() => navigation.navigate('Locations')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuBtns}>
-          <Button color='#bd68ee' title="Leaderboard" onPress={() => navigation.navigate('Leaderboard')}/>
+          <Button color='#0096c7' title="Leaderboard" onPress={() => navigation.navigate('Leaderboard')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuBtns}>
-          <Button color='#bd68ee' title="Upload" onPress={() => navigation.navigate('Upload')}/>
+          <Button color='#0096c7' title="Upload" onPress={() => navigation.navigate('Upload')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuBtns}>
-          <Button color='#bd68ee' title="Profile" onPress={() => navigation.navigate('Profile')}/>
+          <Button color='#0096c7' title="Profile" onPress={() => navigation.navigate('Profile')}/>
         </TouchableOpacity>
       </View>
     );
@@ -83,7 +84,7 @@ function RegisterScreen({navigation}) {
       style={styles.pages}>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <><Image style={styles.image} source={require("./assets/pin.png")} />
-        <Text style={styles.title}> Pin It!</Text>
+        <Text style={styles.pinIt}> Pin It!</Text>
         <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
@@ -120,7 +121,7 @@ function RegisterScreen({navigation}) {
         />
       </View>
     <TouchableOpacity>
-      <Button style={styles.forgot_button} title="Already Have An Account? Login Now!" onPress={() => navigation.navigate('Login')}/>
+      <Button style={styles.forgot_button} color='#9d4edd' title="Already Have An Account? Login Now!" onPress={() => navigation.navigate('Login')}/>
     </TouchableOpacity>
     <TouchableOpacity style={styles.loginBtn}>
       <Button color='white' title="Register" onPress={() => navigation.navigate('Home')}/>
@@ -180,8 +181,8 @@ function UploadScreen({navigation}) {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.pages}>
-      <Image style={styles.image} source={require("./assets/pin.png")} />
-      <Text style={styles.title}> Pin It !</Text>
+      <Image style={styles.upload_image} source={require("./assets/upload.png")} />
+      <Text style={styles.general_text}>Found a location you want to share? Upload it below!</Text>
       <StatusBar style="auto" />
     <View style={styles.inputView}>
       <TextInput
@@ -231,22 +232,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
  
+  // images 
+
   image: {
     marginBottom: 20,
     width: "30%",
     height: 150,
   },
 
-  title: {
+  house_image: {
     marginBottom: 30,
-    fontSize: 40,
-    fontWeight: "bold",
+    width: "25%",
+    height: 110,
   },
- 
+
+  upload_image: {
+    width: "30%",
+    height: 150,
+  },
+
+  // input box styling 
+
   inputView: {
-    backgroundColor: "#ffff",
-    borderRadius: 30,
-    width: "70%",
+    backgroundColor: '#e9ecef',
+    borderRadius: 10,
+    width: "75%",
     height: 45,
     marginBottom: 20,
   },
@@ -258,14 +268,16 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
  
+  // buttons
+
   forgot_button: {
     height: 30,
     marginBottom: 30,
   },
- 
+
   loginBtn: {
     width: "80%",
-    borderRadius: 25,
+    borderRadius: 10,
     height: 50,
     justifyContent: "center",
     marginTop: 20,
@@ -279,8 +291,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 35,
     backgroundColor: "white",
-    fontFamily: 'sans-serif-thin',
   }, 
+
+  // anything you want to add to every page
+  
+  pages: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+
+  // text 
+
+  title: {
+    marginBottom: 30,
+    fontSize: 40,
+    fontWeight: "bold",
+  },
 
   heading: {
     fontSize: 70,
@@ -289,10 +318,18 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
   },
 
-  pages: {
-    flex: 1,
-    backgroundColor: '#e0aaff',
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  general_text: {
+    fontFamily: 'sans-serif',
+    textAlign:"center",
+    fontSize: 25, 
+    marginHorizontal: 30,
+    marginBottom: 40, 
+    marginTop: 20,
+    },
+
+    pinIt: {
+      fontSize: 70, 
+      fontWeight: "bold",
+      marginBottom: 30,
+    }
 });
