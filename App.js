@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { TouchableWithoutFeedback } from "react-native-web";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,25 +14,35 @@ function App() {
         <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'PinIt!'}}/>
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login'}}/>
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'PinIt!'}}/>
-        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'PinIt!'}}/>
-        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'PinIt!'}}/>
-        <Stack.Screen name="Profile" components={ProfileScreen} options={ {title: 'PinIt!'}}/>
-        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'PinIt!'}}/>
+        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'Locations'}}/>
+        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'Upload'}}/>
+        <Stack.Screen name="Profile" component={ProfileScreen} options={ {title: 'Profile'}}/>
+        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Leaderboard'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 export default App;
 
+
 function HomeScreen({navigation}) {
     return (
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home</Text>
-        <Button title="Locations" onPress={() => navigation.navigate('Locations')}/>
-        <Button title="Leaderboard" onPress={() => navigation.navigate('LeaderBoard')}/>
-        <Button title="Upload" onPress={() => navigation.navigate('Upload')}/>
-        <Button title="Profile" onPress={() => navigation.navigate('Profile')}/>
-    </View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e0aaff'}}>
+        <Text style={styles.heading}> Menu </Text>
+        <TouchableOpacity style={styles.menuBtns}>
+          <Button fontfamily='sans-serif' fontweight='bold' color='#bd68ee' title="Locations" onPress={() => navigation.navigate('Locations')}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBtns}>
+          <Button color='#bd68ee' title="Leaderboard" onPress={() => navigation.navigate('Leaderboard')}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBtns}>
+          <Button color='#bd68ee' title="Upload" onPress={() => navigation.navigate('Upload')}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBtns}>
+          <Button color='#bd68ee' title="Profile" onPress={() => navigation.navigate('Profile')}/>
+        </TouchableOpacity>
+      </View>
+
     );
 }
 
@@ -73,7 +84,7 @@ function RegisterScreen({navigation}) {
       <Button style={styles.forgot_button} title="Already Have An Account? Login Now!" onPress={() => navigation.navigate('Login')}/>
     </TouchableOpacity>
     <TouchableOpacity style={styles.loginBtn}>
-      <Button title="Register" onPress={() => navigation.navigate('Home')}/>
+      <Button color='white' title="Register" onPress={() => navigation.navigate('Home')}/>
     </TouchableOpacity>
     </View>
   );
@@ -105,7 +116,7 @@ function LoginScreen({navigation}) {
       />
     </View>
     <TouchableOpacity style={styles.loginBtn}>
-      <Button title="Login" onPress={() => navigation.navigate('Home')}/>
+      <Button color='white' title="Login" onPress={() => navigation.navigate('Home')}/>
     </TouchableOpacity>
     </View>
   );
@@ -113,34 +124,34 @@ function LoginScreen({navigation}) {
 
 function LocationScreen() {
     return (
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Register</Text>
+       <View style={styles.pages}>
+      <Text style={styles.heading}>Locations</Text>
     </View>
     );
 }
 
 function UploadScreen() {
     return (
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Register</Text>
+       <View style={styles.pages}>
+      <Text style={styles.heading}>Upload</Text>
     </View>
     );
 }
 
 function ProfileScreen() {
     return (
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Register</Text>
+       <View style={styles.pages}>
+      <Text style={styles.heading}>Profile</Text>
     </View>
     );
 }
 
 function LeaderboardScreen() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Register</Text>
-    </View>
-    );
+      return (
+        <View style={styles.pages}>
+       <Text style={styles.heading}>Leaderboard</Text>
+     </View>
+     );
 }
  
 const styles = StyleSheet.create({
@@ -193,5 +204,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     backgroundColor: "#0096c7",
+  },
+
+  menuBtns: {
+    width: "80%",
+    borderRadius: 15,
+    height: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 35,
+    backgroundColor: "white",
+    fontFamily: 'sans-serif-thin',
+  }, 
+
+  heading: {
+    fontSize: 70,
+    marginBottom: 15, 
+    fontFamily: 'sans-serif',
+    fontWeight:'bold',
+  },
+
+  pages: {
+    flex: 1,
+    backgroundColor: '#c77dff',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
