@@ -1,9 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TouchableWithoutFeedback } from "react-native-web";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +27,7 @@ export default App;
 function HomeScreen({navigation}) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e0aaff'}}>
-        <Text style={styles.heading}> Menu </Text>
+        <Text style={styles.heading}> Home </Text>
         <TouchableOpacity style={styles.menuBtns}>
           <Button fontfamily='sans-serif' fontweight='bold' color='#bd68ee' title="Locations" onPress={() => navigation.navigate('Locations')}/>
         </TouchableOpacity>
@@ -42,7 +41,6 @@ function HomeScreen({navigation}) {
           <Button color='#bd68ee' title="Profile" onPress={() => navigation.navigate('Profile')}/>
         </TouchableOpacity>
       </View>
-
     );
 }
 
@@ -51,42 +49,47 @@ function RegisterScreen({navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require("./assets/pin.png")} />
-      <Text style={styles.title}> Pin It !</Text>
-      <StatusBar style="auto" />
-     <View style={styles.inputView}>
-      <TextInput
-        style={styles.TextInput}
-        placeholder="Name"
-        placeholderTextColor="#003f5c"
-        onChangeText={(namel) => setEmail(name)}
-      />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.pages}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <><Image style={styles.image} source={require("./assets/pin.png")} />
+        <Text style={styles.title}> Pin It!</Text>
+        <StatusBar style="auto" />
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Name"
+          placeholderTextColor="#003f5c"
+          onChangeText={(namel) => setEmail(name)}
+        />
       </View>
-    <View style={styles.inputView}>
-      <TextInput
-        style={styles.TextInput}
-        placeholder="Email"
-        placeholderTextColor="#003f5c"
-        onChangeText={(email) => setEmail(email)}
-      />
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Email"
+          placeholderTextColor="#003f5c"
+          onChangeText={(email) => setEmail(email)}
+        />
+        </View>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Password"
+          placeholderTextColor="#003f5c"
+          secureTextEntry={true}
+          onChangeText={(password) => setPassword(password)}
+        />
       </View>
-    <View style={styles.inputView}>
-      <TextInput
-        style={styles.TextInput}
-        placeholder="Password"
-        placeholderTextColor="#003f5c"
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
-      />
-    </View>
     <TouchableOpacity>
       <Button style={styles.forgot_button} title="Already Have An Account? Login Now!" onPress={() => navigation.navigate('Login')}/>
     </TouchableOpacity>
     <TouchableOpacity style={styles.loginBtn}>
       <Button color='white' title="Register" onPress={() => navigation.navigate('Home')}/>
     </TouchableOpacity>
-    </View>
+    </>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -94,7 +97,9 @@ function LoginScreen({navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.pages}>
       <Image style={styles.image} source={require("./assets/pin.png")} />
       <Text style={styles.title}> Pin It !</Text>
       <StatusBar style="auto" />
@@ -118,7 +123,7 @@ function LoginScreen({navigation}) {
     <TouchableOpacity style={styles.loginBtn}>
       <Button color='white' title="Login" onPress={() => navigation.navigate('Home')}/>
     </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -131,11 +136,37 @@ function LocationScreen() {
 }
 
 function UploadScreen() {
-    return (
-       <View style={styles.pages}>
-      <Text style={styles.heading}>Upload</Text>
+    const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.pages}>
+      <Image style={styles.image} source={require("./assets/pin.png")} />
+      <Text style={styles.title}> Pin It !</Text>
+      <StatusBar style="auto" />
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Email"
+        placeholderTextColor="#003f5c"
+        onChangeText={(email) => setEmail(email)}
+      />
+      </View>
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.TextInput}
+        placeholder="Password"
+        placeholderTextColor="#003f5c"
+        secureTextEntry={true}
+        onChangeText={(password) => setPassword(password)}
+      />
     </View>
-    );
+    <TouchableOpacity style={styles.loginBtn}>
+      <Button color='white' title="Login" onPress={() => navigation.navigate('Home')}/>
+    </TouchableOpacity>
+    </KeyboardAvoidingView>
+  );
 }
 
 function ProfileScreen() {
@@ -180,8 +211,6 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
- 
-    alignItems: "center",
   },
  
   TextInput: {
@@ -200,7 +229,6 @@ const styles = StyleSheet.create({
     width: "80%",
     borderRadius: 25,
     height: 50,
-    alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
     backgroundColor: "#0096c7",
@@ -210,7 +238,6 @@ const styles = StyleSheet.create({
     width: "80%",
     borderRadius: 15,
     height: 55,
-    alignItems: "center",
     justifyContent: "center",
     marginTop: 35,
     backgroundColor: "white",
@@ -226,7 +253,7 @@ const styles = StyleSheet.create({
 
   pages: {
     flex: 1,
-    backgroundColor: '#c77dff',
+    backgroundColor: '#e0aaff',
     alignItems: "center",
     justifyContent: "center",
   },
