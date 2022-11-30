@@ -61,7 +61,7 @@ function RegisterScreen({navigation}) {
           style={styles.TextInput}
           placeholder="Name"
           placeholderTextColor="#003f5c"
-          onChangeText={(namel) => setEmail(name)}
+          onChangeText={(name) => setEmail(name)}
         />
       </View>
       <View style={styles.inputView}>
@@ -79,6 +79,15 @@ function RegisterScreen({navigation}) {
           placeholderTextColor="#003f5c"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
+        />
+      </View>
+       <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Confirm Password"
+          placeholderTextColor="#003f5c"
+          secureTextEntry={true}
+          onChangeText={(confirmpassword) => setPassword(confirmpassword)}
         />
       </View>
     <TouchableOpacity>
@@ -148,18 +157,18 @@ function UploadScreen() {
     <View style={styles.inputView}>
       <TextInput
         style={styles.TextInput}
-        placeholder="Email"
+        placeholder="Location Name"
         placeholderTextColor="#003f5c"
-        onChangeText={(email) => setEmail(email)}
+        onChangeText={(name) => setEmail(name)}
       />
       </View>
     <View style={styles.inputView}>
       <TextInput
         style={styles.TextInput}
-        placeholder="Password"
+        placeholder="Description"
         placeholderTextColor="#003f5c"
         secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
+        onChangeText={(description) => setPassword(description)}
       />
     </View>
     <TouchableOpacity style={styles.loginBtn}>
