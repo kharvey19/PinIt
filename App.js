@@ -22,14 +22,14 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Welcome!' }} />
-        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
-        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'Locations' }} />
-        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'Upload' }} />
-        <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
-        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Leaderboard' }} />
-        <Stack.Screen name="changePass" component={changePassScreen} options={{ title: 'Change Password' }} />
+        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Welcome!', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'Locations', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'Upload', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Leaderboard', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="changePass" component={changePassScreen} options={{ title: 'Change Password', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -240,10 +240,11 @@ function ProfileScreen({ navigation }) {
       <TouchableOpacity style={styles.topMenuBtn}>
         <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Change Password" onPress={() => navigation.navigate('changePass')} />
       </TouchableOpacity>
+
+      {/* should probably make an alert or make the user conferm they want to log out */}
+
       <TouchableOpacity style={styles.menuBtns}>
-        <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Log Out" 
-        
-        // onPress={() => navigation.navigate('')} 
+        <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Log Out" onPress={() => navigation.navigate('Login')} 
         
         />
       </TouchableOpacity>
