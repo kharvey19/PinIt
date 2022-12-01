@@ -237,6 +237,8 @@ function ProfileScreen({ navigation }) {
   return (
     <View style={styles.pages}>
       <Text style={styles.heading}></Text>
+      <Image style={styles.image} width='35%' source={require("./assets/profile.png")} />
+      <Text style={styles.general_text}>Update Profile Below!</Text>
       <TouchableOpacity style={styles.topMenuBtn}>
         <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Change Password" onPress={() => navigation.navigate('changePass')} />
       </TouchableOpacity>
