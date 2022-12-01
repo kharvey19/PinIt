@@ -1,10 +1,20 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import {StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
+import React, { useState, useEffect, ReactElement, FC } from "react";
+import {Alert, StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Device from 'expo-device';
 import * as Location from 'expo-location';
+import { UserRegistration } from "./UserRegistration";
+import Parse from "parse/react-native.js";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+//Initializing the SDK. 
+Parse.setAsyncStorage(AsyncStorage);
+//You need to copy BOTH the the Application ID and the Javascript Key from: Dashboard->App Settings->Security & Keys 
+Parse.initialize('zAGXnm4PCSN7pG49TJNrlUOWq2xPg1S8bz68VusM','9UZkCqABBIkIe4BYVQsohhfjs0ayqSqtih65kKQy');
+Parse.serverURL = 'https://parseapi.back4app.com/';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,9 +85,6 @@ function HomeScreen({navigation}) {
 }
 
 function RegisterScreen({navigation}) {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -86,46 +93,7 @@ function RegisterScreen({navigation}) {
         <><Image style={styles.image} source={require("./assets/pin.png")} />
         <Text style={styles.pinIt}> Pin It!</Text>
         <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Name"
-          placeholderTextColor="#003f5c"
-          onChangeText={(name) => setEmail(name)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          placeholderTextColor="#003f5c"
-          onChangeText={(email) => setEmail(email)}
-        />
-        </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-      </View>
-       <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Confirm Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(confirmpassword) => setPassword(confirmpassword)}
-        />
-      </View>
-    <TouchableOpacity>
-      <Button style={styles.forgot_button} color='#9d4edd' title="Already Have An Account? Login Now!" onPress={() => navigation.navigate('Login')}/>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.loginBtn}>
-      <Button color='white' title="Register" onPress={() => navigation.navigate('Home')}/>
-    </TouchableOpacity>
+        <UserRegistration />
     </>
     </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
