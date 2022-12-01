@@ -29,6 +29,7 @@ function App() {
         <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'Upload' }} />
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
         <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Leaderboard' }} />
+        <Stack.Screen name="changePass" component={changePassScreen} options={{ title: 'Change Password' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -192,7 +193,8 @@ function LoginScreen({ navigation }) {
 function LocationScreen() {
   return (
     <View style={styles.pages}>
-      <Text style={styles.heading}>Locations</Text>
+            <Image style={styles.image} source={require("./assets/actualpin.png")} />
+      <Text style={styles.heading}></Text>
     </View>
   );
 }
@@ -231,18 +233,73 @@ function UploadScreen({ navigation }) {
   );
 }
 
-function ProfileScreen() {
+function ProfileScreen({ navigation }) {
   return (
     <View style={styles.pages}>
-      <Text style={styles.heading}>Profile</Text>
+      <Text style={styles.heading}></Text>
+      <TouchableOpacity style={styles.topMenuBtn}>
+        <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Change Password" onPress={() => navigation.navigate('changePass')} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.menuBtns}>
+        <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Log Out" 
+        
+        // onPress={() => navigation.navigate('')} 
+        
+        />
+      </TouchableOpacity>
     </View>
+  );
+}
+
+function changePassScreen() {
+  return (
+<KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.pages}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <><Image style={styles.image} source={require("./assets/password.png")} />
+        <Text style={styles.general_text}>Need to change your password? Input a new one below!</Text>
+          <StatusBar style="auto" />
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Email"
+              placeholderTextColor="#003f5c"
+              onChangeText={(email) => setEmail(email)}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="New Password"
+              placeholderTextColor="#003f5c"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Confirm New Password"
+              placeholderTextColor="#003f5c"
+              secureTextEntry={true}
+              onChangeText={(confirmpassword) => setPassword(confirmpassword)}
+            />
+          </View>
+          <TouchableOpacity style={styles.loginBtn}>
+            <Button color='white' title="Change Password"/>
+          </TouchableOpacity>
+        </>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView> 
   );
 }
 
 function LeaderboardScreen() {
   return (
     <View style={styles.pages}>
-      <Text style={styles.heading}>Leaderboard</Text>
+            <Image style={styles.image} source={require("./assets/leaderboard.png")} />
+      <Text style={styles.heading}></Text>
     </View>
   );
 }
