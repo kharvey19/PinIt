@@ -264,14 +264,6 @@ function changePassScreen() {
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
-              placeholder="Email"
-              placeholderTextColor="#003f5c"
-              onChangeText={(email) => setEmail(email)}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
               placeholder="New Password"
               placeholderTextColor="#003f5c"
               secureTextEntry={true}
