@@ -8,34 +8,6 @@ import * as Location from 'expo-location';
 import { UserRegistration } from "./UserRegistration";
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GoogleMap, LoadScript, useJsApiLoader } from '@react-google-maps/api';
-import GoogleMapReact from 'google-map-react';
-
-
-// import GoogleMapReact from 'google-map-react';
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
-
-// function Map(){
-//   return (
-//     <GoogleMap 
-//       defaultZoom={10} 
-//       defaultCenter={{lat: 42.377003, lng:-71.116661}}
-//       />
-//   );
-// }
-
-// const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 
 //Initializing the SDK. 
@@ -50,14 +22,14 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Welcome!', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'Locations', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'Upload', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Leaderboard', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
-        <Stack.Screen name="changePass" component={changePassScreen} options={{ title: 'Change Password', headerStyle: { backgroundColor: '#1a759f', }, headerTitleStyle: { color: 'white' } }} />
+        <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Welcome!', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Locations" component={LocationScreen} options={{ title: 'Locations', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Upload" component={UploadScreen} options={{ title: 'Upload', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Leaderboard', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
+        <Stack.Screen name="changePass" component={changePassScreen} options={{ title: 'Change Password', headerStyle: {backgroundColor: '#1a759f',}, headerTitleStyle: {color: 'white'} }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -219,30 +191,13 @@ function LoginScreen({ navigation }) {
 }
 
 function LocationScreen() {
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627
-    },
-    zoom: 11
-  };
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyCgAxhhhkuBjXi_8u__RJF6bmhkYBpDwo0" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        />
-      </GoogleMapReact>
-    </div>
+    <View style={styles.pages}>
+            <Image style={styles.image} source={require("./assets/actualpin.png")} />
+      <Text style={styles.heading}></Text>
+    </View>
   );
 }
-
 
 function UploadScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -291,8 +246,8 @@ function ProfileScreen({ navigation }) {
       {/* should probably make an alert or make the user conferm they want to log out */}
 
       <TouchableOpacity style={styles.menuBtns}>
-        <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Log Out" onPress={() => navigation.navigate('Login')}
-
+        <Button fontfamily='sans-serif' fontweight='bold' color='white' title="Log Out" onPress={() => navigation.navigate('Login')} 
+        
         />
       </TouchableOpacity>
     </View>
@@ -301,12 +256,12 @@ function ProfileScreen({ navigation }) {
 
 function changePassScreen() {
   return (
-    <KeyboardAvoidingView
+<KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.pages}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <><Image style={styles.image} source={require("./assets/password.png")} />
-          <Text style={styles.general_text}>Need to change your password? Input a new one below!</Text>
+        <Text style={styles.general_text}>Need to change your password? Input a new one below!</Text>
           <StatusBar style="auto" />
           <View style={styles.inputView}>
             <TextInput
@@ -327,18 +282,18 @@ function changePassScreen() {
             />
           </View>
           <TouchableOpacity style={styles.loginBtn}>
-            <Button color='white' title="Change Password" />
+            <Button color='white' title="Change Password"/>
           </TouchableOpacity>
         </>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </KeyboardAvoidingView> 
   );
 }
 
 function LeaderboardScreen() {
   return (
     <View style={styles.pages}>
-      <Image style={styles.image} source={require("./assets/leaderboard.png")} />
+            <Image style={styles.image} source={require("./assets/leaderboard.png")} />
       <Text style={styles.heading}></Text>
     </View>
   );
