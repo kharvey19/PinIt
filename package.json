@@ -23,7 +23,11 @@
     "expo-device": "~5.0.0",
     "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
+<<<<<<< HEAD
     "google-map-react": "^2.2.0",
+=======
+    "firebase": "^9.14.0",
+>>>>>>> 7435792651b00310814872e38ba0be7cb25a458c
     "parse": "^3.5.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
